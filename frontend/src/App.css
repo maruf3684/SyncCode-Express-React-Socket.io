@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+body{
+    background-color: #1c1e29;
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+/* login page */
+
+.homePageWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    height: 100vh;
+}
+.fromWrapper{
+    background-color: #282a36;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+}
+
+footer a {
+    color: #4aee88;
+    text-decoration: none;
+}
+
+.inputgroup{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    
+}
+.homePagelogo{
+    height: 80px;
+}
+
+.inputBox{
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin-bottom: 14px;
+    background: #eee;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn{
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.joinBtn{
+    background: #4aee88;
+    width: 100px;
+    margin-left: auto;
+
+}
+
+.joinBtn:hover{
+    background: #2b824c;
+
+}
+
+.createInfo{
+    margin-top: 15px;
+    display:flex;
+    justify-content: center;
+    font-size: 14px;
+    color: #fff;
+    
+}
+.check{
+    color: #4aee88;
+    text-decoration: none;
+    border-bottom: 1px solid #4aee88;
+    transition: all 0.3s ease-in-out;
+}
+
+.check:hover{
+    color: #2b824c;
+}
+
+
+/* EDITOR PAGE */
+
+.mainWrap{
+    display:grid;
+    grid-template-columns:250px 1fr;
+}
+
+.sidepanel{
+    background: #151829;
+    color:#fff;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidepanel-header{
+   flex: 1;
+}
+.sidepanel-header-userList{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+.client{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1px;
+    cursor: pointer;
+}
+
+.sidepanel-header-logo{
+    border-bottom: 1px solid #424242;
+    padding-bottom: 10px;
+}
+
+
+
+.logoImage{
+ height: 70px;
+}
+
+.copyBtn{
+  border-radius: 100px;
+  font-weight: bold;
+}
+
+.copyBtn:hover{
+    background: #878d89;
+}
+
+.leaveBtn{
+    background: #4aee88;
+    margin-top: 20px;
+    border-radius: 100px;
+    font-weight: bold;
+}
+
+.leaveBtn:hover{
+    background: #2b824c;
+}
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+    color: #4aee88;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+.CodeMirror{
+    min-height: calc(100vh - 20px);
+  font-size: 20px;
+  line-height: 1.6;
+  padding-top: 20px;
+}
