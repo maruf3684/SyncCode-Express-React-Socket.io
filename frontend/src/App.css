@@ -149,6 +149,19 @@ footer a {
   font-weight: bold;
 }
 
+.runBtn{
+    border-radius: 100px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: crimson;
+    
+}
+
+.runBtn:hover{
+    background-color:  chartreuse;
+}
+  
+
 .copyBtn:hover{
     background: #878d89;
 }
@@ -180,4 +193,58 @@ footer a {
   font-size: 20px;
   line-height: 1.6;
   padding-top: 20px;
+}
+
+
+.modlasOuter{
+    background: #eee;
+    height: auto;
+    z-index: 999;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    
+}
+
+.modalContent{
+    width: 30rem;
+    min-height: 20rem;
+    max-height: 25rem;
+    position: relative;
+    background: #888888;
+    padding: 90px;
+    border-radius: 10px;
+    box-shadow: 5px 10px #3a3a3a;
+    color: #4aee88;
+}
+
+.crossButton{
+    position: absolute;
+    top: -3%;
+    left: 98%;
+    background-color: crimson;
+    border: navy;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    color: #eee;
+    font-weight: bolder;
+    
+}
+
+.mainCode{
+    max-width: 30rem;
+    max-height: 25rem;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+    
+}
+
+.radioControl{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
 }

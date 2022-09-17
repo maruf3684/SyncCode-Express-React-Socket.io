@@ -6,7 +6,8 @@ import { initSocket } from "../socket";
 import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useNavigate, Navigate, useParams } from "react-router-dom";
-
+import Modals from "../components/Modals";
+import axios from "axios";
 const EditorPage = () => {
 	const codeRef = useRef(null);
 	const socketRef = useRef();
@@ -14,6 +15,9 @@ const EditorPage = () => {
 	const { roomId } = useParams();
 	const reactNavigator = useNavigate();
 	const [clients, setClients] = useState([]);
+	const [showModal, setShowModal] = useState(false);
+	const [output, setOutput] = useState("");
+	const [language, setLanguage] = useState("javascript");
 
 	useEffect(() => {
 		const init = async () => {
@@ -85,55 +89,101 @@ const EditorPage = () => {
 		reactNavigator("/");
 	};
 
+	const fetchCode = () => {
+		if (codeRef.current != null) {
+			axios({
+				method: "post",
+				url: "http://localhost:5000/code",
+				data: {
+					code: codeRef.current,
+					language:language
+				},
+			})
+				.then((response) => {
+					setOutput(response.data.output.replace(/\n/g, "<br/>"));
+					setShowModal(true);
+				})
+				.catch((err) => {
+					console.log("Error Happening");
+					console.log(err);
+				});
+		}
+	};
+
+	
+	
+
 	if (!location.state) {
 		console.log("redirect hosse homepage e bcz username nai");
 		return <Navigate to="/" />;
 	}
 
 	return (
-		<div className="mainWrap">
-			<div className="sidepanel">
-				{/* sidepanel header part */}
-				<div className="sidepanel-header">
-					<div className="sidepanel-header-logo">
-						<img className="logoImage" src="/code-sync.png" alt="logo" />
+		<>
+			{/* modal part start */}
+			<Modals
+				showModal={showModal}
+				close={() => setShowModal(false)}
+				output={output}
+			/>
+			{/* modal part end */}
+
+			<div className="mainWrap">
+				<div className="sidepanel">
+					{/* sidepanel header part */}
+					<div className="sidepanel-header">
+						<div className="sidepanel-header-logo">
+							<img className="logoImage" src="/code-sync.png" alt="logo" />
+						</div>
+						<div className="sidepanel-header-title">
+							<h4 className="connect blink_me">Active Now</h4>
+						</div>
+
+						{/* clint part */}
+						<div className="sidepanel-header-userList">
+							{clients.map((client, index) => (
+								<Client key={client.socketId} username={client.username} />
+							))}
+						</div>
+						{/* clint part end */}
 					</div>
-					<div className="sidepanel-header-title">
-						<h4 className="connect blink_me">Active Now</h4>
+					{/* sidepanel header part end */}
+
+					{/* sidepanel footer part */}
+
+					<div className="radioControl" onChange={(e)=>setLanguage(e.target.value)}>
+						<input type="radio" value="javascript" name="lang"  defaultChecked/> Js
+						<input type="radio" value="python" name="lang" /> Python
 					</div>
 
-					{/* clint part */}
-					<div className="sidepanel-header-userList">
-						{clients.map((client, index) => (
-							<Client key={client.socketId} username={client.username} />
-						))}
-					</div>
-					{/* clint part end */}
+					<button className="btn runBtn" onClick={() => fetchCode()}>
+						Run Code
+					</button>
+
+					<button className="btn copyBtn" onClick={copyRoomId}>
+						Copy Room ID
+					</button>
+					<button className="btn leaveBtn" onClick={leaveRoom}>
+						Leave Room
+					</button>
+
+					{/* sidepanel footer part end */}
 				</div>
-				{/* sidepanel header part end */}
 
-				{/* sidepanel footer part */}
-				<button className="btn copyBtn" onClick={copyRoomId}>
-					Copy Room ID
-				</button>
-				<button className="btn leaveBtn" onClick={leaveRoom}>
-					Leave Room
-				</button>
-				{/* sidepanel footer part end */}
+				{/* editor panel start */}
+				<div className="editorWrap">
+					<Editor
+						socketRef={socketRef}
+						roomId={roomId}
+						onCodeChange={(code) => {
+							codeRef.current = code;
+						}}
+						language={language}
+					/>
+				</div>
+				{/* editor panel end */}
 			</div>
-
-			{/* editor panel start */}
-			<div className="editorWrap">
-				<Editor
-					socketRef={socketRef}
-					roomId={roomId}
-					onCodeChange={(code) => {
-						codeRef.current = code;
-					}}
-				/>
-			</div>
-			{/* editor panel end */}
-		</div>
+		</>
 	);
 };
 

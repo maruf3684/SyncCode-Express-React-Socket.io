@@ -8,13 +8,15 @@
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server:prod":"node backend/server",
+    "server:prod": "node backend/server",
     "start": "node backend/server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "concurrently": "^7.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "morgan": "^1.10.0",
